@@ -2,12 +2,14 @@
     "builds": [{
         "src": "chic_images/wsgi.py",
         "use": "@vercel/python",
-        "config": { "maxLambdaSize": "15mb", "runtime": "python3.9" }
-    }],
-    "routes": [
-        {
-            "src": "/(.*)",
-            "dest": "chic_images/wsgi.py"
+        "config": {
+            "maxLambdaSize": "15mb",
+            "runtime": "python3.9",
+            "installCommand": "yum install -y pango-devel cairo-devel libffi-devel && pip install --upgrade pip && pip install -r requirements.txt"
         }
-    ]
+    }],
+    "routes": [{
+        "src": "/(.*)",
+        "dest": "chic_images/wsgi.py"
+    }]
 }
