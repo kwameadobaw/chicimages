@@ -3,9 +3,7 @@
         "src": "chic_images/wsgi.py",
         "use": "@vercel/python",
         "config": {
-            "maxLambdaSize": "15mb",
-            "runtime": "python3.9",
-            "installCommand": "yum install -y postgresql-devel && pip install --upgrade pip && pip install -r requirements.txt"
+            "installCommand": "bash vercel-build.sh"
         }
     }],
     "routes": [{
