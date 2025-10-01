@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block title %}About Us - Chic Images{% endblock %}
 
@@ -14,7 +15,7 @@
             </div>
             <div class="col-lg-6" data-aos="fade-left">
                 <div class="about-image">
-                    <img src="/static/images/artificial-intelligence-7889375.jpg" alt="About Chic Images" class="img-fluid">
+                    <img src="{% static 'images/artificial-intelligence-7889375.jpg' %}" alt="About Chic Images" class="img-fluid">
                 </div>
             </div>
         </div>
@@ -36,7 +37,7 @@
             </div>
             <div class="col-lg-6" data-aos="fade-left">
                 <div class="story-image">
-                    <img src="/static/images/artificial-intelligence-7889375.jpg" alt="Our Story" class="img-fluid">
+                    <img src="{% static 'images/artificial-intelligence-7889375.jpg' %}" alt="Our Story" class="img-fluid">
                 </div>
             </div>
         </div>
@@ -78,7 +79,7 @@
             <div class="col-lg-4 col-md-6 mb-4" data-aos="fade-up" data-aos-delay="{{ forloop.counter|add:100 }}">
                 <div class="team-member">
                     <div class="member-image">
-                        <img src="/static/images/{{ member.image }}" alt="{{ member.name }}" class="img-fluid">
+                        <img src="{% static 'images/' %}{{ member.image }}" alt="{{ member.name }}" class="img-fluid">
                     </div>
                     <div class="member-info">
                         <h3>{{ member.name }}</h3>

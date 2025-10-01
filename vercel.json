@@ -6,8 +6,18 @@
             "installCommand": "bash vercel-build.sh"
         }
     }],
-    "routes": [{
-        "src": "/(.*)",
-        "dest": "chic_images/wsgi.py"
-    }]
+    "routes": [
+        {
+            "src": "/static/(.*)",
+            "dest": "/static/$1"
+        },
+        {
+            "src": "/media/(.*)",
+            "dest": "/media/$1"
+        },
+        {
+            "src": "/(.*)",
+            "dest": "chic_images/wsgi.py"
+        }
+    ]
 }
