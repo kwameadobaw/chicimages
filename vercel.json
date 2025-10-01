@@ -5,7 +5,7 @@
         "config": {
             "maxLambdaSize": "15mb",
             "runtime": "python3.9",
-            "installCommand": "yum install -y pango-devel cairo-devel libffi-devel && pip install --upgrade pip && pip install -r requirements.txt"
+            "installCommand": "yum install -y postgresql-devel && pip install --upgrade pip && pip install -r requirements.txt"
         }
     }],
     "routes": [{
