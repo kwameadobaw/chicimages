@@ -1,0 +1,133 @@
+{% extends 'base.html' %}
+
+{% block title %}About Us - Chic Images{% endblock %}
+
+{% block content %}
+<!-- About Hero Section -->
+<section class="about-hero">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-6" data-aos="fade-right">
+                <h1>{{ about_content.main_heading }}</h1>
+                <h2>{{ about_content.subheading }}</h2>
+                <div class="divider"></div>
+            </div>
+            <div class="col-lg-6" data-aos="fade-left">
+                <div class="about-image">
+                    <img src="/static/images/artificial-intelligence-7889375.jpg" alt="About Chic Images" class="img-fluid">
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Our Story Section -->
+<section class="our-story">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 text-center" data-aos="fade-up">
+                <h2>Our Story</h2>
+                <div class="divider mx-auto"></div>
+            </div>
+        </div>
+        <div class="row mt-5">
+            <div class="col-lg-6" data-aos="fade-right">
+                <p class="lead">{{ about_content.history }}</p>
+            </div>
+            <div class="col-lg-6" data-aos="fade-left">
+                <div class="story-image">
+                    <img src="/static/images/artificial-intelligence-7889375.jpg" alt="Our Story" class="img-fluid">
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Mission & Approach Section -->
+<section class="mission-approach">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6" data-aos="fade-right">
+                <div class="mission-box">
+                    <h3>Our Mission</h3>
+                    <p>{{ about_content.mission }}</p>
+                </div>
+            </div>
+            <div class="col-lg-6" data-aos="fade-left">
+                <div class="approach-box">
+                    <h3>Our Approach</h3>
+                    <p>{{ about_content.approach }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Team Section -->
+<section class="team">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 text-center" data-aos="fade-up">
+                <h2>Meet Our Team</h2>
+                <div class="divider mx-auto"></div>
+                <p class="section-subtitle">The talented professionals behind our stunning photography</p>
+            </div>
+        </div>
+        <div class="row mt-5">
+            {% for member in team_members %}
+            <div class="col-lg-4 col-md-6 mb-4" data-aos="fade-up" data-aos-delay="{{ forloop.counter|add:100 }}">
+                <div class="team-member">
+                    <div class="member-image">
+                        <img src="/static/images/{{ member.image }}" alt="{{ member.name }}" class="img-fluid">
+                    </div>
+                    <div class="member-info">
+                        <h3>{{ member.name }}</h3>
+                        <p class="role">{{ member.role }}</p>
+                        <p class="bio">{{ member.bio }}</p>
+                        <div class="social-links">
+                            <a href="#"><i class="fab fa-instagram"></i></a>
+                            <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="#"><i class="fab fa-twitter"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<!-- Awards Section -->
+<section class="awards">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 text-center" data-aos="fade-up">
+                <h2>Awards & Recognition</h2>
+                <div class="divider mx-auto"></div>
+            </div>
+        </div>
+        <div class="row mt-5">
+            <div class="col-lg-8 mx-auto">
+                <ul class="awards-list" data-aos="fade-up">
+                    {% for award in awards %}
+                    <li><i class="fas fa-award"></i> {{ award }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Call to Action -->
+<section class="cta">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-10 mx-auto text-center" data-aos="zoom-in">
+                <h2>Ready to work with us?</h2>
+                <p>Let's create something beautiful together. Contact us to discuss your photography needs.</p>
+                <a href="#contact" class="btn btn-primary btn-lg">Get in Touch</a>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

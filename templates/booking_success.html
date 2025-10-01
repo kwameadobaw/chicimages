@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block title %}Booking Successful - Chic Images{% endblock %}
+
+{% block content %}
+<section class="success-page">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 offset-md-2 text-center">
+                <div class="success-message" data-aos="fade-up">
+                    <i class="fas fa-check-circle"></i>
+                    <h1>Booking Request Submitted!</h1>
+                    <p>Thank you for choosing Chic Images. We have received your booking request and will contact you shortly to confirm the details.</p>
+                    <div class="mt-4">
+                        <a href="{% url 'home' %}" class="btn btn-outline-primary me-3">Return to Home</a>
+                        <a href="{% url 'portfolio' %}" class="btn btn-primary">View Our Portfolio</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+
+{% block title %}Portfolio - Chic Images{% endblock %}
+
+{% block content %}
+<section class="portfolio-hero">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <h1 data-aos="fade-up">Our Portfolio</h1>
+                <p data-aos="fade-up" data-aos-delay="200">Explore our collection of professional photography work</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="portfolio-gallery">
+    <div class="container">
+        <div class="row mb-4">
+            <div class="col-md-12">
+                <div class="category-filter" data-aos="fade-up">
+                    <a href="{% url 'portfolio' %}" class="filter-btn {% if not category %}active{% endif %}">All</a>
+                    {% for cat in categories %}
+                    <a href="{% url 'portfolio_category' cat.slug %}" class="filter-btn {% if category.id == cat.id %}active{% endif %}">{{ cat.name }}</a>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        
+        <div class="row gallery-container">
+            {% if photos %}
+                {% for photo in photos %}
+                <div class="col-md-4 col-sm-6 gallery-item" data-aos="fade-up" data-aos-delay="{{ forloop.counter|add:100 }}">
+                    <div class="gallery-image">
+                        <img src="{{ photo.image.url }}" alt="{{ photo.title }}" class="img-fluid">
+                        <div class="gallery-overlay">
+                            <h4>{{ photo.title }}</h4>
+                            <p>{{ photo.description }}</p>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            {% else %}
+                <div class="col-12 text-center">
+                    <p>No photos available in this category yet.</p>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</section>
+
+<section class="cta-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 offset-md-2 text-center">
+                <h2 data-aos="fade-up">Ready to capture your special moments?</h2>
+                <p data-aos="fade-up" data-aos-delay="100">Book a session with our professional photographers today.</p>
+                <a href="{% url 'booking' %}" class="btn btn-primary" data-aos="fade-up" data-aos-delay="200">Book Now</a>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

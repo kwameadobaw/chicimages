@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Personality Profiles - Chic Images{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+<section class="personality-hero py-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <h1 class="display-4 fw-bold">Personality Profiles</h1>
+                <p class="lead">Discover the stories behind our featured personalities</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Personalities Section -->
+<section class="personalities-section py-5">
+    <div class="container">
+        <div class="row">
+            {% for personality in personalities %}
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="card personality-card h-100">
+                        <div class="image-container {% if personality.orientation == 'portrait' %}portrait{% else %}landscape{% endif %}">
+                            <img src="{{ personality.featured_image.url }}" class="card-img-top" alt="{{ personality.name }}" oncontextmenu="return false;">
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">{{ personality.name }}</h5>
+                            <p class="card-text">{{ personality.short_description }}</p>
+                            <a href="{% url 'personality_detail' personality.slug %}" class="btn btn-primary">Read More</a>
+                        </div>
+                    </div>
+                </div>
+            {% empty %}
+                <div class="col-12 text-center">
+                    <p>No personalities available at the moment. Check back soon!</p>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    // Disable right-click on images
+    document.addEventListener('contextmenu', function(e) {
+        if (e.target.tagName === 'IMG') {
+            e.preventDefault();
+            return false;
+        }
+    });
+    
+    // Disable drag and drop for images
+    document.addEventListener('dragstart', function(e) {
+        if (e.target.tagName === 'IMG') {
+            e.preventDefault();
+            return false;
+        }
+    });
+</script>
+{% endblock %}

@@ -1,0 +1,131 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<!-- Hero Section -->
+<section class="hero">
+    <div class="hero-image">
+        <img src="/static/images/artificial-intelligence-7889375.jpg" alt="Chic Images Photography" data-aos="fade-in">
+    </div>
+    <div class="hero-content">
+        <h1 data-aos="fade-up">Chic Images</h1>
+        <p data-aos="fade-up" data-aos-delay="200">Capturing moments, creating memories</p>
+        <div class="hero-buttons" data-aos="fade-up" data-aos-delay="400">
+            <a href="/booking/" class="btn btn-primary">Book Now</a>
+            <a href="/portfolio/" class="btn btn-outline">View Portfolio</a>
+        </div>
+    </div>
+</section>
+
+<!-- Services Section -->
+<section class="services" id="services">
+    <div class="container">
+        <div class="section-header" data-aos="fade-up">
+            <h2>Our Services</h2>
+            <p>Professional photography services tailored to your needs</p>
+        </div>
+        <div class="row">
+            {% for service in services %}
+            <div class="col-md-3" data-aos="fade-up" data-aos-delay="{{ forloop.counter|add:'100' }}">
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-{{ service.icon }}"></i>
+                    </div>
+                    <h3>{{ service.title }}</h3>
+                    <p>{{ service.description }}</p>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<!-- Testimonials Section -->
+<section class="testimonials" id="testimonials">
+    <div class="container">
+        <div class="section-header" data-aos="fade-up">
+            <h2>What Our Clients Say</h2>
+            <p>Hear from those who have experienced our photography services</p>
+        </div>
+        <div class="row">
+            {% for testimonial in testimonials %}
+            <div class="col-md-4" data-aos="fade-up" data-aos-delay="{{ forloop.counter|add:'100' }}">
+                <div class="testimonial-card">
+                    <div class="testimonial-image">
+                        <img src="/static/images/artificial-intelligence-7889375.jpg" alt="{{ testimonial.name }}">
+                    </div>
+                    <div class="testimonial-content">
+                        <p>"{{ testimonial.text }}"</p>
+                        <h4>{{ testimonial.name }}</h4>
+                        <span>{{ testimonial.company }}</span>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<!-- Clients Section -->
+<section class="clients">
+    <div class="container">
+        <div class="section-header" data-aos="fade-up">
+            <h2>Our Clients</h2>
+            <p>Trusted by leading brands and businesses</p>
+        </div>
+        <div class="client-logos" data-aos="fade-up">
+            <div class="logo-slider">
+                {% for client in clients %}
+                <div class="logo-item">
+                    <img src="/static/images/artificial-intelligence-7889375.jpg" alt="{{ client.name }}">
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CTA Section -->
+<section class="cta">
+    <div class="container">
+        <div class="cta-content" data-aos="fade-up">
+            <h2>Ready to capture your special moments?</h2>
+            <p>Book a session with us today and let's create beautiful memories together.</p>
+            <a href="/booking/" class="btn btn-primary">Book Now</a>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    // Logo slider functionality
+    $(document).ready(function(){
+        // Clone the logo items to create an infinite loop effect
+        const logoSlider = $('.logo-slider');
+        const logoItems = $('.logo-item');
+        
+        // Clone items and append to slider
+        logoItems.clone().appendTo(logoSlider);
+        
+        // Set animation
+        let position = 0;
+        const speed = 1;
+        const totalWidth = logoItems.length * logoItems.outerWidth(true);
+        
+        function slideLogos() {
+            position -= speed;
+            
+            // Reset position when all logos have scrolled
+            if (Math.abs(position) >= totalWidth) {
+                position = 0;
+            }
+            
+            logoSlider.css('transform', `translateX(${position}px)`);
+            requestAnimationFrame(slideLogos);
+        }
+        
+        // Start animation
+        slideLogos();
+    });
+</script>
+{% endblock %}

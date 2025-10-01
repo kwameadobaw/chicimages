@@ -1,0 +1,91 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}{{ personality.name }} - Chic Images{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+<section class="personality-hero py-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <h1 class="display-4 fw-bold">{{ personality.name }}</h1>
+                <p class="lead">{{ personality.title }}</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Personality Header -->
+<section class="personality-detail-header py-5">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-4">
+                <div class="featured-image-container {% if personality.orientation == 'portrait' %}portrait{% else %}landscape{% endif %}">
+                    <img src="{{ personality.featured_image.url }}" class="img-fluid rounded" alt="{{ personality.name }}" oncontextmenu="return false;">
+                </div>
+            </div>
+            <div class="col-lg-8">
+                <div class="personality-description mb-4">
+                    {{ personality.full_description|linebreaks }}
+                </div>
+                <a href="{% url 'personalities' %}" class="btn btn-outline-primary">
+                    <i class="fas fa-arrow-left me-2"></i>Back to Personalities
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Gallery Section -->
+<section class="personality-gallery py-5 bg-light">
+    <div class="container">
+        <h2 class="text-center mb-5">Photo Gallery</h2>
+        <div class="row g-4">
+            {% for image in images %}
+                <div class="col-lg-4 col-md-6">
+                    <div class="gallery-item">
+                        <img src="{{ image.image.url }}" class="img-fluid rounded" alt="{{ image.caption|default:personality.name }}" oncontextmenu="return false;">
+                        {% if image.caption %}
+                            <div class="caption mt-2">{{ image.caption }}</div>
+                        {% endif %}
+                    </div>
+                </div>
+            {% empty %}
+                <div class="col-12 text-center">
+                    <p>No additional images available.</p>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    // Disable right-click on images
+    document.addEventListener('contextmenu', function(e) {
+        if (e.target.tagName === 'IMG') {
+            e.preventDefault();
+            return false;
+        }
+    });
+    
+    // Disable drag and drop for images
+    document.addEventListener('dragstart', function(e) {
+        if (e.target.tagName === 'IMG') {
+            e.preventDefault();
+            return false;
+        }
+    });
+    
+    // Disable keyboard shortcuts for saving images
+    document.addEventListener('keydown', function(e) {
+        // Ctrl+S, Command+S
+        if ((e.ctrlKey || e.metaKey) && e.keyCode === 83) {
+            e.preventDefault();
+            return false;
+        }
+    });
+</script>
+{% endblock %}
