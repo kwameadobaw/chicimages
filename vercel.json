@@ -2,6 +2,10 @@
     "version": 2,
     "builds": [
         {
+            "src": "static/**/*",
+            "use": "@vercel/static"
+        },
+        {
             "src": "chic_images/wsgi.py",
             "use": "@vercel/python",
             "config": {
@@ -10,6 +14,14 @@
         }
     ],
     "routes": [
+        {
+            "src": "/static/(.*)",
+            "dest": "/static/$1"
+        },
+        {
+            "src": "/media/(.*)",
+            "dest": "/media/$1"
+        },
         {
             "src": "/(.*)",
             "dest": "chic_images/wsgi.py"
