@@ -18,11 +18,25 @@ def serve_static(request, path):
     if '..' in path or path.startswith('/'):
         raise Http404("Not found")
     
-    # Build the full file path
-    static_path = os.path.join(settings.STATIC_ROOT, path)
+    # Try multiple static file locations
+    possible_paths = [
+        os.path.join(settings.STATIC_ROOT, path),
+        os.path.join(settings.BASE_DIR, 'static', path),
+    ]
     
-    # Check if file exists
-    if not os.path.exists(static_path):
+    # For Django admin files, also check the admin static directory
+    if path.startswith('admin/'):
+        from django.contrib import admin
+        admin_static_path = os.path.join(os.path.dirname(admin.__file__), 'static', 'admin', path[6:])
+        possible_paths.insert(0, admin_static_path)
+    
+    static_path = None
+    for possible_path in possible_paths:
+        if os.path.exists(possible_path):
+            static_path = possible_path
+            break
+    
+    if static_path is None:
         raise Http404("Static file not found")
     
     # Determine content type
@@ -41,7 +55,7 @@ def serve_static(request, path):
         # Set appropriate headers for different file types
         if path.endswith(('.css', '.js')):
             response['Cache-Control'] = 'public, max-age=31536000'
-        elif path.endswith(('.png', '.jpg', '.jpeg', '.gif', '.webp')):
+        elif path.endswith(('.png', '.jpg', '.jpeg', '.gif', '.webp', '.svg')):
             response['Cache-Control'] = 'public, max-age=31536000'
         
         return response
