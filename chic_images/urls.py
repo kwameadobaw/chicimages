@@ -20,7 +20,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.views.static import serve
 from django.urls import re_path
-from . import static_files
+from . import static_views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -30,7 +30,7 @@ urlpatterns = [
 # Serve static files in production
 if not settings.DEBUG:
     urlpatterns += [
-        re_path(r'^static/(?P<path>.*)$', static_files.serve_static),
+        re_path(r'^static/(?P<path>.*)$', static_views.serve_static_api),
         re_path(r'^media/(?P<path>.*)$', serve, {'document_root': settings.MEDIA_ROOT}),
     ]
 else:
