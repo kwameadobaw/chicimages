@@ -1,11 +1,18 @@
 {
-    "builds": [{
-        "src": "chic_images/wsgi.py",
-        "use": "@vercel/python",
-        "config": {
-            "installCommand": "bash vercel-build.sh"
+    "version": 2,
+    "builds": [
+        {
+            "src": "static/**/*",
+            "use": "@vercel/static"
+        },
+        {
+            "src": "chic_images/wsgi.py",
+            "use": "@vercel/python",
+            "config": {
+                "installCommand": "bash vercel-build.sh"
+            }
         }
-    }],
+    ],
     "routes": [
         {
             "src": "/static/(.*)",
