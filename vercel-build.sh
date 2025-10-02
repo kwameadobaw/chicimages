@@ -22,7 +22,7 @@ pip install -r requirements.txt
 
 # Collect static files for deployment
 echo "📁 Collecting static files..."
-python manage.py collectstatic --noinput
+python manage.py collectstatic --noinput --clear
 
 # Ensure Django admin static files are available
 echo "🔧 Setting up Django admin static files..."
